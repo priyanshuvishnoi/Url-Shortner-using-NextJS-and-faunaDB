@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useState } from 'react';
+import type { FormEvent, MouseEvent } from 'react';
 import axios from 'axios';
 import styles from '../styles/Home.module.css';
 
@@ -8,7 +9,7 @@ export default function Home() {
   const [shortUrl, setShortUrl] = useState('');
   const [copied, setCopied] = useState(false);
 
-  const formHandler = async e => {
+  const formHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const regex =
       '((http|https)://)(www.)?' +
@@ -28,8 +29,8 @@ export default function Home() {
     } else alert('Enter a valid Url');
   };
 
-  const copyHandler = e => {
-    const text = document.getElementById('shortUrl').innerHTML;
+  const copyHandler = (e: MouseEvent<HTMLDivElement>) => {
+    const text = document.getElementById('shortUrl')!.innerHTML;
     console.log(text);
     const elem = document.createElement('textarea');
     document.body.appendChild(elem);
